@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Permohonan Kerja · Pengawal Keselamatan Bersenjata</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#f2f3f5;font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#111}
+  .wrap{max-width:480px;margin:0 auto;padding:16px 14px 48px}
+  .card{background:#fff;border-radius:18px;padding:22px 18px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+  h1{margin:0;font-size:21px;line-height:1.25}
+  .sub{margin:4px 0 16px;color:#666;font-size:14px}
+  .prog{display:flex;gap:6px;margin:0 0 6px}.prog i{flex:1;height:6px;border-radius:6px;background:#e3e5e9}.prog i.on{background:#1a1a1a}
+  .steplbl{font-size:13px;color:#666;margin:0 0 4px}
+  h2{font-size:18px;margin:0 0 6px}
+  label,.q{display:block;font-size:14px;color:#333;margin:16px 0 6px;font-weight:500}
+  .hint{font-size:12.5px;color:#777;font-weight:400}
+  input[type=text],input[type=tel],input[type=number],textarea{width:100%;font:inherit;padding:12px;border:1px solid #c9ccd2;border-radius:12px;background:#fff}
+  input:focus,textarea:focus{outline:none;border-color:#1a1a1a}
+  textarea{resize:vertical;min-height:70px}
+  .two{display:flex;gap:10px}.two>div{flex:1}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips button{font:inherit;font-size:15px;border:1px solid #c9ccd2;background:#fff;border-radius:999px;padding:9px 16px;cursor:pointer;color:#222}
+  .chips button.on{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
+  .yn{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #eef0f2}
+  .yn .t{font-size:15px;color:#222;min-width:0}.yn .chips{flex-wrap:nowrap;flex:none;gap:6px}.yn .chips button{padding:8px 14px}
+  .age{margin-top:6px;font-size:13.5px;color:#145c34}
+  .err{color:#b42318;font-size:14px;margin-top:12px;display:none}
+  .nav{display:flex;gap:10px;margin-top:22px}
+  .btn{flex:1;font:inherit;font-weight:600;border:0;border-radius:12px;padding:14px;cursor:pointer;background:#1a1a1a;color:#fff}
+  .btn.sec{background:#eceef1;color:#1a1a1a;flex:0 0 auto;padding:14px 18px}
+  .btn:disabled{opacity:.5}
+  .pic{display:flex;gap:12px;align-items:center;border:1.5px dashed #b8bcc4;border-radius:14px;padding:12px;cursor:pointer;background:#fafbfc}
+  .pic img{width:64px;height:64px;object-fit:cover;border-radius:10px;background:#eceef1;flex:none}
+  .pic .ph{width:64px;height:64px;border-radius:10px;background:#eceef1;display:flex;align-items:center;justify-content:center;font-size:26px;flex:none}
+  .pic .t{font-size:14px;color:#333}.pic .t small{display:block;color:#777;font-size:12.5px}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin-top:18px;font-size:14px;color:#333}
+  .consent input{width:22px;height:22px;flex:none;margin-top:1px}
+  .hide{display:none}
+  .done{text-align:center;padding:26px 8px}.done .ok{font-size:46px}.done h2{margin:8px 0}
+  .done p{color:#444;font-size:15px}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="card">
+  <div id="form">
+    <h1>Permohonan Kerja<br>Pengawal Keselamatan Bersenjata</h1>
+    <p class="sub">Kawasan kerja: Selangor &amp; Kuala Lumpur. Isi dalam 3 langkah ringkas.</p>
+    <div class="prog"><i class="on"></i><i></i><i></i></div>
+
+    <section data-step="1">
+      <p class="steplbl">Langkah 1 / 3</p><h2>Maklumat diri</h2>
+      <label for="name">Nama penuh <span class="hint">(seperti dalam MyKad)</span></label>
+      <input type="text" id="name" maxlength="120" autocomplete="name">
+      <label for="ic">No. MyKad</label>
+      <input type="text" id="ic" inputmode="numeric" maxlength="14" placeholder="900101-14-5521" autocomplete="off">
+      <div class="age hide" id="ageInfo"></div>
+      <label for="phone">Nombor WhatsApp</label>
+      <input type="tel" id="phone" inputmode="tel" maxlength="15" placeholder="0123456789">
+      <span class="q">Status perkahwinan</span>
+      <div class="chips" data-f="marital"><button type="button">Bujang</button><button type="button">Berkahwin</button><button type="button">Duda</button></div>
+      <label for="address">Alamat penuh tempat tinggal sekarang</label>
+      <textarea id="address" maxlength="300" placeholder="No. rumah, jalan, taman, poskod, bandar, negeri"></textarea>
+      <div class="two"><div><label for="height">Tinggi (cm)</label><input type="number" id="height" inputmode="numeric" min="120" max="230" placeholder="170"></div>
+        <div><label for="weight">Berat (kg)</label><input type="number" id="weight" inputmode="numeric" min="35" max="200" placeholder="70"></div></div>
+    </section>
+
+    <section data-step="2" class="hide">
+      <p class="steplbl">Langkah 2 / 3</p><h2>Pengalaman &amp; syarat</h2>
+      <label for="exp">Pengalaman kerja keselamatan / Armed Guard</label>
+      <textarea id="exp" maxlength="300" placeholder="Contoh: Pengawal keselamatan 3 tahun, ada CSG"></textarea>
+      <div class="chips" style="margin-top:8px"><button type="button" id="noExp">Tiada pengalaman</button></div>
+      <div style="margin-top:12px">
+        <div class="yn"><span class="t">Warganegara Malaysia?</span><div class="chips" data-f="citizen"><button type="button">Ya</button><button type="button">Tidak</button></div></div>
+        <div class="yn"><span class="t">Ada rekod jenayah atau dadah?</span><div class="chips" data-f="record"><button type="button">Ya</button><button type="button">Tidak</button></div></div>
+        <div class="yn"><span class="t">Ada masalah kesihatan?</span><div class="chips" data-f="health"><button type="button">Ya</button><button type="button">Tidak</button></div></div>
+        <div id="healthBox" class="hide"><label for="healthNote">Nyatakan masalah kesihatan secara ringkas</label><input type="text" id="healthNote" maxlength="200"></div>
+        <div class="yn"><span class="t">Boleh membaca dan menulis?</span><div class="chips" data-f="rw"><button type="button">Ya</button><button type="button">Tidak</button></div></div>
+        <div class="yn"><span class="t">Ada pengangkutan sendiri?</span><div class="chips" data-f="transport"><button type="button">Ya</button><button type="button">Tidak</button></div></div>
+        <div class="yn"><span class="t">Perlukan hostel?</span><div class="chips" data-f="hostel"><button type="button">Ya</button><button type="button">Tidak</button></div></div>
+        <div class="yn"><span class="t">Sanggup bekerja lebih masa (OT)?</span><div class="chips" data-f="ot"><button type="button">Ya</button><button type="button">Tidak</button></div></div>
+      </div>
+      <span class="q">Bila boleh mula bekerja?</span>
+      <div class="chips" data-f="start"><button type="button">Segera</button><button type="button">Dalam 2 minggu</button><button type="button">Bulan depan</button><button type="button">Lain-lain</button></div>
+      <input type="text" id="startOther" class="hide" maxlength="80" placeholder="Nyatakan tarikh" style="margin-top:8px">
+    </section>
+
+    <section data-step="3" class="hide">
+      <p class="steplbl">Langkah 3 / 3</p><h2>Gambar &amp; hantar</h2>
+      <p class="hint" style="margin:0">Gambar adalah pilihan, tetapi membantu kami menyemak permohonan anda dengan lebih cepat.</p>
+      <span class="q">Gambar diri (penuh badan)</span>
+      <div class="pic" id="picPhoto" role="button" tabindex="0"><span class="ph">📷</span><span class="t">Tekan untuk pilih gambar<small>Gambar jelas, berdiri, nampak seluruh badan</small></span></div>
+      <input type="file" id="filePhoto" accept="image/*" class="hide">
+      <span class="q">Gambar MyKad (depan)</span>
+      <div class="pic" id="picIc" role="button" tabindex="0"><span class="ph">🪪</span><span class="t">Tekan untuk pilih gambar<small>Pastikan nama dan nombor jelas</small></span></div>
+      <input type="file" id="fileIc" accept="image/*" class="hide">
+      <label class="consent"><input type="checkbox" id="consent"><span>Saya mengesahkan maklumat yang diberikan adalah benar dan bersetuju dihubungi oleh Kai / Kenn bagi urusan permohonan kerja ini.</span></label>
+    </section>
+
+    <div class="err" id="err"></div>
+    <div class="nav"><button type="button" class="btn sec hide" id="back">Kembali</button><button type="button" class="btn" id="next">Seterusnya</button></div>
+  </div>
+
+  <div id="done" class="done hide">
+    <div class="ok">✅</div>
+    <h2 id="doneT">Permohonan diterima</h2>
+    <p id="doneP">Terima kasih. Kami akan menghubungi anda melalui WhatsApp jika anda disenarai pendek.</p>
+    <p style="font-size:14px;color:#666">Mesej sahaja, JANGAN TELEFON.</p>
+  </div>
+</div></div>
+<script>
+(function(){
+  var API='https://script.google.com/macros/s/AKfycbxjvrUWOrwal0mtHQY9A8cDhXgFzOcO7lkzI2y0VMc5s8QjriGjHOHA00h5P-RxBaY3ig/exec';
+  var $=function(s){return document.querySelector(s);}, $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
+  var step=1, A={}, pics={photo:'',icPhoto:''};
+  function err(m){var e=$('#err'); e.textContent=m||''; e.style.display=m?'block':'none'; if(m)e.scrollIntoView({block:'nearest',behavior:'smooth'});}
+  function digits(v){return String(v||'').replace(/\D/g,'');}
+  function icAge(ic){var d=digits(ic); if(d.length!==12)return null; var yy=+d.slice(0,2), mm=+d.slice(2,4), dd=+d.slice(4,6); if(mm<1||mm>12||dd<1||dd>31)return null;
+    var now=new Date(), cy=now.getFullYear(), y=(2000+yy>cy?1900:2000)+yy, a=cy-y; if(now.getMonth()+1<mm||(now.getMonth()+1===mm&&now.getDate()<dd))a--; return a;}
+  $$('.chips[data-f]').forEach(function(g){g.addEventListener('click',function(e){var b=e.target.closest('button'); if(!b)return; g.querySelectorAll('button').forEach(function(x){x.classList.toggle('on',x===b);}); A[g.dataset.f]=b.textContent; err('');
+    if(g.dataset.f==='health')$('#healthBox').classList.toggle('hide',A.health!=='Ya'); if(g.dataset.f==='start')$('#startOther').classList.toggle('hide',A.start!=='Lain-lain');});});
+  $('#noExp').addEventListener('click',function(){var on=!this.classList.contains('on'); this.classList.toggle('on',on); $('#exp').value=on?'Tiada':''; $('#exp').disabled=on;});
+  $('#ic').addEventListener('input',function(){var d=digits(this.value).slice(0,12); var f=d.length>8?d.slice(0,6)+'-'+d.slice(6,8)+'-'+d.slice(8):d.length>6?d.slice(0,6)+'-'+d.slice(6):d; if(f!==this.value)this.value=f;
+    var a=icAge(d), el=$('#ageInfo'); if(d.length===12&&a!=null){el.textContent='Umur: '+a+' tahun'; el.style.color='#145c34'; el.classList.remove('hide');} else if(d.length===12){el.textContent='No. MyKad tidak sah'; el.style.color='#b42318'; el.classList.remove('hide');} else el.classList.add('hide');});
+  function check(n){var v=function(id){return ($(id).value||'').trim();};
+    if(n===1){if(v('#name').length<3)return 'Sila isi nama penuh.'; if(icAge(v('#ic'))==null)return 'Sila semak No. MyKad (12 digit).'; var p=digits(v('#phone')); if(p.length<10||p.length>12)return 'Sila semak nombor WhatsApp.';
+      if(!A.marital)return 'Sila pilih status perkahwinan.'; if(v('#address').length<10)return 'Sila isi alamat penuh.'; var h=+v('#height'), w=+v('#weight'); if(!(h>=120&&h<=230))return 'Sila isi tinggi dalam cm (contoh 170).'; if(!(w>=35&&w<=200))return 'Sila isi berat dalam kg (contoh 70).';}
+    if(n===2){if(!v('#exp'))return 'Sila isi pengalaman, atau tekan "Tiada pengalaman".'; var need=['citizen','record','health','rw','transport','hostel','ot']; for(var i=0;i<need.length;i++)if(!A[need[i]])return 'Sila jawab semua soalan Ya / Tidak.';
+      if(A.health==='Ya'&&!v('#healthNote'))return 'Sila nyatakan masalah kesihatan.'; if(!A.start)return 'Sila pilih bila boleh mula bekerja.'; if(A.start==='Lain-lain'&&!v('#startOther'))return 'Sila nyatakan bila boleh mula.';}
+    if(n===3){if(!$('#consent').checked)return 'Sila tandakan pengesahan.';}
+    return '';}
+  function show(n){step=n; $$('section[data-step]').forEach(function(s){s.classList.toggle('hide',+s.dataset.step!==n);}); $$('.prog i').forEach(function(x,i){x.classList.toggle('on',i<n);});
+    $('#back').classList.toggle('hide',n===1); $('#next').textContent=n===3?'Hantar permohonan':'Seterusnya'; err(''); window.scrollTo(0,0);}
+  $('#back').addEventListener('click',function(){if(step>1)show(step-1);});
+  $('#next').addEventListener('click',function(){var m=check(step); if(m)return err(m); if(step<3)return show(step+1); submit();});
+  function resize(file,max){return new Promise(function(ok,no){var r=new FileReader(); r.onload=function(){var i=new Image(); i.onload=function(){var k=Math.min(1,max/Math.max(i.width,i.height)), c=document.createElement('canvas'); c.width=Math.round(i.width*k); c.height=Math.round(i.height*k); var g=c.getContext('2d'); g.fillStyle='#fff'; g.fillRect(0,0,c.width,c.height); g.drawImage(i,0,0,c.width,c.height); ok(c.toDataURL('image/jpeg',0.85));}; i.onerror=no; i.src=r.result;}; r.onerror=no; r.readAsDataURL(file);});}
+  function picker(box,input,key){var open=function(){input.click();}; box.addEventListener('click',open); box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault(); open();}});
+    input.addEventListener('change',function(){var f=input.files&&input.files[0]; if(!f)return; if(!/^image\//.test(f.type))return err('Sila pilih gambar sahaja.');
+      box.querySelector('.t').firstChild.textContent='Memproses…'; resize(f,1280).then(function(d){pics[key]=d; var ph=box.querySelector('.ph,img'); var im=document.createElement('img'); im.src=d; im.alt=''; ph.replaceWith(im); box.querySelector('.t').firstChild.textContent='Gambar dipilih ✓ (tekan untuk tukar)'; err('');}).catch(function(){box.querySelector('.t').firstChild.textContent='Tekan untuk pilih gambar'; err('Gambar tidak dapat dibaca. Cuba gambar lain.');});});}
+  $('#consent').addEventListener('change',function(){err('');});
+  picker($('#picPhoto'),$('#filePhoto'),'photo'); picker($('#picIc'),$('#fileIc'),'icPhoto');
+  function submit(){var b=$('#next'); b.disabled=true; b.textContent='Menghantar…'; err('');
+    var v=function(id){return ($(id).value||'').trim();};
+    var payload={name:v('#name'),ic:v('#ic'),phone:v('#phone'),marital:A.marital,address:v('#address'),height:v('#height'),weight:v('#weight'),exp:v('#exp'),citizen:A.citizen,record:A.record,health:A.health,healthNote:v('#healthNote'),rw:A.rw,transport:A.transport,hostel:A.hostel,ot:A.ot,
+      start:A.start==='Lain-lain'?v('#startOther'):A.start,consent:$('#consent').checked,photo:pics.photo,icPhoto:pics.icPhoto};
+    fetch(API,{method:'POST',credentials:'omit',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'applyJob',payload:payload})})
+      .then(function(r){return r.json();}).then(function(r){if(!r||!r.ok){b.disabled=false; b.textContent='Hantar permohonan'; return err((r&&r.msg)||'Tidak berjaya. Sila cuba lagi.');}
+        if(r.dup){$('#doneT').textContent='Permohonan sudah diterima'; $('#doneP').textContent='No. MyKad ini sudah membuat permohonan sebelum ini. Tidak perlu hantar lagi. Kami akan menghubungi anda melalui WhatsApp jika anda disenarai pendek.';}
+        $('#form').classList.add('hide'); $('#done').classList.remove('hide'); window.scrollTo(0,0);})
+      .catch(function(){b.disabled=false; b.textContent='Hantar permohonan'; err('Tiada sambungan. Semak internet dan cuba lagi.');});}
+})();
+</script>
+</body>
+</html>
