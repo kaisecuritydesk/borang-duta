@@ -14,6 +14,7 @@
   .sub{margin:4px 0 16px;color:#666;font-size:14px}
   .prog{display:flex;gap:6px;margin:0 0 6px}.prog i{flex:1;height:6px;border-radius:6px;background:#e3e5e9}.prog i.on{background:#1a1a1a}
   .steplbl{font-size:13px;color:#666;margin:0 0 4px}
+  .must{border:2px solid #c9a44c;background:#fff8e6;border-radius:12px;padding:12px 14px;margin:6px 0 4px;font-size:14px;line-height:1.45;color:#3a2e0f}.must b{color:#8a6100}.req{color:#b42318;font-weight:700;font-size:13px;margin-left:4px}.opt{color:#666;font-weight:500;font-size:13px;margin-left:4px}.icnote{display:block;margin-top:6px;font-size:13px;color:#8a6100;font-weight:600}
   h2{font-size:18px;margin:0 0 6px}
   label,.q{display:block;font-size:14px;color:#333;margin:16px 0 6px;font-weight:500}
   .hint{font-size:12.5px;color:#777;font-weight:400}
@@ -47,7 +48,7 @@
 <div class="wrap"><div class="card">
   <div id="form">
     <h1>Permohonan Kerja<br>Pengawal Keselamatan Bersenjata</h1>
-    <p class="sub">Kawasan kerja: Selangor &amp; Kuala Lumpur. Isi dalam 3 langkah ringkas.</p>
+    <p class="sub">Kawasan kerja: Selangor &amp; Kuala Lumpur. Isi dalam 3 langkah ringkas.<span class="icnote">📌 Sediakan gambar MyKad (depan &amp; belakang) – wajib untuk tapisan KDN / PDRM.</span></p>
     <div class="prog"><i class="on"></i><i></i><i></i></div>
 
     <section data-step="1">
@@ -89,13 +90,16 @@
 
     <section data-step="3" class="hide">
       <p class="steplbl">Langkah 3 / 3</p><h2>Gambar &amp; hantar</h2>
-      <p class="hint" style="margin:0">Gambar adalah pilihan, tetapi membantu kami menyemak permohonan anda dengan lebih cepat.</p>
-      <span class="q">Gambar diri (penuh badan)</span>
+      <div class="must"><b>WAJIB: Gambar MyKad (depan &amp; belakang)</b><br>Kami perlu membuat <b>tapisan KDN dan semakan rekod PDRM</b> sebelum temuduga. Borang tidak boleh dihantar tanpa gambar MyKad. Maklumat anda sulit dan hanya digunakan untuk semakan ini.</div>
+      <span class="q">Gambar diri (penuh badan)<span class="opt">(pilihan)</span></span>
       <div class="pic" id="picPhoto" role="button" tabindex="0"><span class="ph">📷</span><span class="t">Tekan untuk pilih gambar<small>Gambar jelas, berdiri, nampak seluruh badan</small></span></div>
       <input type="file" id="filePhoto" accept="image/*" class="hide">
-      <span class="q">Gambar MyKad (depan)</span>
+      <span class="q">Gambar MyKad (depan)<span class="req">* Wajib</span></span>
       <div class="pic" id="picIc" role="button" tabindex="0"><span class="ph">🪪</span><span class="t">Tekan untuk pilih gambar<small>Pastikan nama dan nombor jelas</small></span></div>
       <input type="file" id="fileIc" accept="image/*" class="hide">
+      <span class="q">Gambar MyKad (belakang)<span class="req">* Wajib</span></span>
+      <div class="pic" id="picIcB" role="button" tabindex="0"><span class="ph">🪪</span><span class="t">Tekan untuk pilih gambar<small>Bahagian belakang MyKad, jelas</small></span></div>
+      <input type="file" id="fileIcB" accept="image/*" class="hide">
       <label class="consent"><input type="checkbox" id="consent"><span>Saya mengesahkan maklumat yang diberikan adalah benar dan bersetuju dihubungi oleh Kai / Kenn bagi urusan permohonan kerja ini.</span></label>
     </section>
 
@@ -114,7 +118,7 @@
 (function(){
   var API='https://script.google.com/macros/s/AKfycbxjvrUWOrwal0mtHQY9A8cDhXgFzOcO7lkzI2y0VMc5s8QjriGjHOHA00h5P-RxBaY3ig/exec';
   var $=function(s){return document.querySelector(s);}, $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s));};
-  var step=1, A={}, pics={photo:'',icPhoto:''};
+  var step=1, A={}, pics={photo:'',icPhoto:'',icBack:''};
   function err(m){var e=$('#err'); e.textContent=m||''; e.style.display=m?'block':'none'; if(m)e.scrollIntoView({block:'nearest',behavior:'smooth'});}
   function digits(v){return String(v||'').replace(/\D/g,'');}
   function icAge(ic){var d=digits(ic); if(d.length!==12)return null; var yy=+d.slice(0,2), mm=+d.slice(2,4), dd=+d.slice(4,6); if(mm<1||mm>12||dd<1||dd>31)return null;
@@ -129,7 +133,7 @@
       if(!A.marital)return 'Sila pilih status perkahwinan.'; if(v('#address').length<10)return 'Sila isi alamat penuh.'; var h=+v('#height'), w=+v('#weight'); if(!(h>=120&&h<=230))return 'Sila isi tinggi dalam cm (contoh 170).'; if(!(w>=35&&w<=200))return 'Sila isi berat dalam kg (contoh 70).';}
     if(n===2){if(!v('#exp'))return 'Sila isi pengalaman, atau tekan "Tiada pengalaman".'; var need=['citizen','record','health','rw','transport','hostel','ot']; for(var i=0;i<need.length;i++)if(!A[need[i]])return 'Sila jawab semua soalan Ya / Tidak.';
       if(A.health==='Ya'&&!v('#healthNote'))return 'Sila nyatakan masalah kesihatan.'; if(!A.start)return 'Sila pilih bila boleh mula bekerja.'; if(A.start==='Lain-lain'&&!v('#startOther'))return 'Sila nyatakan bila boleh mula.';}
-    if(n===3){if(!$('#consent').checked)return 'Sila tandakan pengesahan.';}
+    if(n===3){if(!pics.icPhoto||!pics.icBack)return 'Sila muat naik gambar MyKad depan dan belakang untuk tapisan KDN / PDRM.'; if(!$('#consent').checked)return 'Sila tandakan pengesahan.';}
     return '';}
   function show(n){step=n; $$('section[data-step]').forEach(function(s){s.classList.toggle('hide',+s.dataset.step!==n);}); $$('.prog i').forEach(function(x,i){x.classList.toggle('on',i<n);});
     $('#back').classList.toggle('hide',n===1); $('#next').textContent=n===3?'Hantar permohonan':'Seterusnya'; err(''); window.scrollTo(0,0);}
@@ -140,11 +144,11 @@
     input.addEventListener('change',function(){var f=input.files&&input.files[0]; if(!f)return; if(!/^image\//.test(f.type))return err('Sila pilih gambar sahaja.');
       box.querySelector('.t').firstChild.textContent='Memproses…'; resize(f,1280).then(function(d){pics[key]=d; var ph=box.querySelector('.ph,img'); var im=document.createElement('img'); im.src=d; im.alt=''; ph.replaceWith(im); box.querySelector('.t').firstChild.textContent='Gambar dipilih ✓ (tekan untuk tukar)'; err('');}).catch(function(){box.querySelector('.t').firstChild.textContent='Tekan untuk pilih gambar'; err('Gambar tidak dapat dibaca. Cuba gambar lain.');});});}
   $('#consent').addEventListener('change',function(){err('');});
-  picker($('#picPhoto'),$('#filePhoto'),'photo'); picker($('#picIc'),$('#fileIc'),'icPhoto');
+  picker($('#picPhoto'),$('#filePhoto'),'photo'); picker($('#picIc'),$('#fileIc'),'icPhoto'); picker($('#picIcB'),$('#fileIcB'),'icBack');
   function submit(){var b=$('#next'); b.disabled=true; b.textContent='Menghantar…'; err('');
     var v=function(id){return ($(id).value||'').trim();};
     var payload={name:v('#name'),ic:v('#ic'),phone:v('#phone'),marital:A.marital,address:v('#address'),height:v('#height'),weight:v('#weight'),exp:v('#exp'),citizen:A.citizen,record:A.record,health:A.health,healthNote:v('#healthNote'),rw:A.rw,transport:A.transport,hostel:A.hostel,ot:A.ot,
-      start:A.start==='Lain-lain'?v('#startOther'):A.start,consent:$('#consent').checked,photo:pics.photo,icPhoto:pics.icPhoto};
+      start:A.start==='Lain-lain'?v('#startOther'):A.start,consent:$('#consent').checked,photo:pics.photo,icPhoto:pics.icPhoto,icBack:pics.icBack};
     fetch(API,{method:'POST',credentials:'omit',redirect:'follow',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'applyJob',payload:payload})})
       .then(function(r){return r.json();}).then(function(r){if(!r||!r.ok){b.disabled=false; b.textContent='Hantar permohonan'; return err((r&&r.msg)||'Tidak berjaya. Sila cuba lagi.');}
         if(r.dup){$('#doneT').textContent='Permohonan sudah diterima'; $('#doneP').textContent='No. MyKad ini sudah membuat permohonan sebelum ini. Tidak perlu hantar lagi. Kami akan menghubungi anda melalui WhatsApp jika anda disenarai pendek.';}
