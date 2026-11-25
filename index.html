@@ -60,7 +60,7 @@
     <label>Tandatangan (guna jari)</label>
     <canvas class="sig" id="sig"></canvas>
     <div class="sigbar"><span>Tandatangan di dalam kotak</span><button class="sec" id="clearSig" type="button" style="padding:6px 12px">Padam</button></div>
-    <label class="consent"><input type="checkbox" id="consent"><span>Saya bersetuju syarikat memotong jumlah ini dari gaji atau OT saya mengikut jadual yang ditetapkan oleh syarikat.</span></label>
+    <label class="consent"><input type="checkbox" id="consent"><span>Saya bersetuju syarikat memotong jumlah ini sepenuhnya dari gaji (7hb) atau OT (20hb) saya yang berikutnya, sebelum bayaran dibuat.</span></label>
     <div class="err" id="formErr"></div>
     <button class="btn" id="sendBtn" type="button">Hantar</button>
   </div>
@@ -115,7 +115,7 @@
       if (!r.ok) { showErr($('icErr'), r.msg); return; }
       verifiedIC = d; leftAmt = Number(r.left || 0);
       $('who').textContent = '✓ ' + r.name + (r.phone ? '  ·  Tel ' + r.phone : '');
-      $('leftInfo').textContent = leftAmt > 0 ? 'Baki boleh dimohon bulan ini: RM' + leftAmt.toFixed(2) + ' (had RM' + r.limit + ' sebulan)' : 'Had pinjaman RM' + r.limit + ' sebulan sudah penuh. Sila mohon bulan depan.';
+      $('leftInfo').textContent = leftAmt > 0 ? 'Baki boleh dimohon bulan ini: RM' + leftAmt.toFixed(2) + ' (had RM' + r.limit + ' sebulan: RM500 sebelum gaji + RM500 sebelum OT; maksimum RM500 setiap permohonan)' : 'Had pinjaman RM' + r.limit + ' sebulan sudah penuh. Sila mohon bulan depan.';
       $('leftInfo').style.display = 'block';
       $('who').style.display = 'block';
       if (leftAmt <= 0) { $('rest').classList.add('hide'); return; }
@@ -149,6 +149,7 @@
     if (!verifiedIC) return showErr($('formErr'), 'Sila semak No. kad pengenalan dahulu.');
     if (!/^\d+(\.\d{1,2})?$/.test(amt) || Number(amt) <= 0) return showErr($('formErr'), 'Masukkan jumlah pinjaman yang betul.');
     if (Number(amt) > leftAmt + 0.0001) return showErr($('formErr'), 'Jumlah melebihi baki bulan ini (RM' + leftAmt.toFixed(2) + ').');
+    if (Number(amt) > 500) return showErr($('formErr'), 'Maksimum RM500 setiap permohonan (sebelum gaji atau sebelum OT).');
     if (purpose.length < 3) return showErr($('formErr'), 'Nyatakan tujuan pinjaman.');
     var bank = $('bank').value, acct = $('acct').value.replace(/\D/g, ''), acct2 = $('acct2').value.replace(/\D/g, '');
     if (!bank) return showErr($('formErr'), 'Pilih bank anda.');
